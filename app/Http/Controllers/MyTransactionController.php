@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use App\Models\Rekening;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\TransactionItem;
@@ -58,7 +59,9 @@ class MyTransactionController extends Controller
 
     public function transaction(Transaction $transaction)
     {
-        return view('pages.dashboard.transaction.create', compact('transaction'));
+        $rekening = Rekening::get();
+
+        return view('pages.dashboard.transaction.create', compact('transaction', 'rekening'));
     }
 
     /**

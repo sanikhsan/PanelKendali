@@ -9,6 +9,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\MyTransactionController;
 use App\Http\Controllers\ProductGalleryController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\RekeningController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,13 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
             Route::resource('user', UserController::class)->only([
                 'index', 'edit', 'update', 'destroy'
             ]);
+
+            Route::resource('rekening', RekeningController::class);
+            // Route::get('rekening', [RekeningController::class, 'index'])->name('rekening-index');
+            // Route::post('addRekening', [RekeningController::class, 'store'])->name('addRekening');
+            // Route::get('add-rekening', [RekeningController::class, 'create'])->name('add-rekening');
+            // Route::get('hapus-rekening', [RekeningController::class, 'index'])->name('hapus-rekening');
+            // Route::get('rekening-edit', [RekeningController::class, 'edit'])->name('edit-rekening');
         });
     });
 });

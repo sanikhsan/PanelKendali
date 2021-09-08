@@ -146,7 +146,7 @@
                                 <label for="complete-name" class="text-sm mb-2">Nama Lengkap</label>
                                 <input data-input name="name" type="text" id="complete-name"
                                     class="border-gray-200 border rounded-lg px-4 py-2 bg-white text-sm focus:border-blue-200 focus:outline-none"
-                                    value="{{ $user->email }}"
+                                    value="{{ $user->name }}"
                                     placeholder="Masukan nama kamu" />
                             </div>
 
