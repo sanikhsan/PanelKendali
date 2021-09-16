@@ -28,6 +28,8 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('total_price')->default(0);
 
             $table->string('payment')->default('MANUAL');
+            $table->string('path')->nullable();
+            $table->string('keterangan')->nullable();
             
             $table->softDeletes();
             $table->timestamps();

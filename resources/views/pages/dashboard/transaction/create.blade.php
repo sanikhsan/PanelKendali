@@ -42,23 +42,46 @@
                     @endforeach	
                 </div>
 
+            <form class="w-full" action="{{ route('dashboard.transaction-upload', $id) }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="id_trans" value="{{ $id }}">
                 <div class="container pt-5">
                     <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full px-3 py-3 text-center">
-                            <a href="https://api.whatsapp.com/send/?phone=628996372182&text=Halo+Admin+Saya+ingin+memverifikasi+pesanan+saya,+berikut+ini+bukti+transfernya&app_absent=0"
-                               target="_blank"
-                               class=" shadow-lg bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                Kirim Bukti Transfer (Upload)
-                            </a>
+                        <div class="w-full px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                Bukti Transfer
+                            </label>
+                            <input accept="image/*" value="{{ old('files') }}" name="bukti_transaksi" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="file" placeholder="Gallery Files">
                         </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                Keterangan
+                            </label>
+                            <textarea name="keterangan" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Catatan atau keterangan">{{ old('description') }}</textarea>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3 py-3 text-center">
+                            <button type="submit" class=" shadow-lg bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                                Upload Bukti Transfer
+                            </button>
+                        </div>
+                        {{-- <div class="w-full px-3 py-3 text-center">
                             <a href="https://api.whatsapp.com/send/?phone=628996372182&text=Halo+Admin+Saya+ingin+memverifikasi+pesanan+saya,+berikut+ini+bukti+transfernya&app_absent=0"
                                target="_blank"
                                class=" shadow-lg bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                                 Kirim Bukti Transfer (WhatsApp)
                             </a>
-                        </div>
-                        <div class="w-full px-3 py-3 text-right">
+                        </div> --}}
+                        <div class="w-full px-3 py-10 text-right">
+                            <a href="https://api.whatsapp.com/send/?phone=628996372182&text=Halo+Admin+Saya+ingin+memverifikasi+pesanan+saya,+berikut+ini+bukti+transfernya&app_absent=0"
+                               target="_blank"
+                               class=" shadow-lg bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                                Kirim Bukti Transfer (WhatsApp)
+                            </a>
+                            <a href="" class="pr-5"></a>
                             <a href="{{ route('dashboard.my-transaction.index') }}"
                                class=" shadow-lg bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                                 Kembali
@@ -66,6 +89,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>

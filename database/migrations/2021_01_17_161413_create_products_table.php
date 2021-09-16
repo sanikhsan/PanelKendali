@@ -19,11 +19,11 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->bigInteger('price');
             $table->longText('description');
-            $table->Int('stock');
+            $table->integer('stock');
             $table->string('slug')->unique();
             $table->string('tags')->nullable();
             $table->bigInteger('categories_id');
-
+            $table->bigInteger('supplier_id');
             $table->softDeletes();
             $table->timestamps();
         });

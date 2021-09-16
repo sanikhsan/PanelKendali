@@ -10,6 +10,7 @@ use App\Http\Controllers\MyTransactionController;
 use App\Http\Controllers\ProductGalleryController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\RekeningController;
+use App\Http\Controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,10 +41,11 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
         Route::resource('my-transaction', MyTransactionController::class)->only([
-            'index', 'show', 'store', 'create'
+            'index', 'show', 'create'
         ]);
 
         Route::get('my-transaction/transaction/{id}', [MyTransactionController::class, 'transaction'])->name('transaction');
+        Route::post('my-transaction/transaction/{id}', [MyTransactionController::class, 'upload'])->name('transaction-upload');
 
         Route::middleware(['admin'])->group(function () {
             Route::resource('product', ProductController::class);
@@ -59,6 +61,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
             ]);
 
             Route::resource('rekening', RekeningController::class);
+            Route::resource('supplier', SupplierController::class);
             // Route::get('rekening', [RekeningController::class, 'index'])->name('rekening-index');
             // Route::post('addRekening', [RekeningController::class, 'store'])->name('addRekening');
             // Route::get('add-rekening', [RekeningController::class, 'create'])->name('add-rekening');

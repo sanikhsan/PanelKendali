@@ -149,6 +149,9 @@
                                     </svg>
                                 </div>
                             </div>
+                            <span class="text-xs text-right font-semibold inline-block py-1 px-2 uppercase rounded text-black-600 bg-gray-200 uppercase last:mr-0 mr-1">
+                               Kategori : {{ $product->category->name }}
+                            </span>
                             <img src="{{ $product->galleries()->exists() ? $product->galleries->first()->url : 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}" alt=""
                                 class="w-full h-full object-cover object-center p-2" />
                         </div>

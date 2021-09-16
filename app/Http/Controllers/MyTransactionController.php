@@ -8,6 +8,7 @@ use App\Models\Rekening;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\TransactionItem;
+use Illuminate\Support\Facades\DB;
 
 class MyTransactionController extends Controller
 {
@@ -52,16 +53,15 @@ class MyTransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Transaction $transaction)
+    public function create(Transaction $request)
     {
         //
     }
 
-    public function transaction(Transaction $transaction)
+    public function transaction($id)
     {
         $rekening = Rekening::get();
-
-        return view('pages.dashboard.transaction.create', compact('transaction', 'rekening'));
+        return view('pages.dashboard.transaction.create', compact('id', 'rekening'));
     }
 
     /**
@@ -70,25 +70,9 @@ class MyTransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Transaction $request, Transaction $myTransaction)
+    public function store(Request $request)
     {
-        $query = Transaction::with(['user'])->where('users_id', Auth::user()->id);
-
-        $files = $request->file('files');
-
-        if($request->hasFile('files'))
-        {
-            foreach ($files as $file) {
-                $path = $file->store('public/transfer');
-
-                TransactionItem::create([
-                    'products_id' => $myTransaction->id,
-                    'url' => $path
-                ]);
-            }
-        }
-
-        return redirect()->route('dashboard.product.gallery.index', $myTransaction->id);
+        //
     }
 
     /**
@@ -134,9 +118,18 @@ class MyTransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function upload(Request $request)
     {
-        //
+        $imagee = $request->file('bukti_transaksi');
+        $keterangan = $request->keterangan;
+        if ($request->hasFile('bukti_transaksi')) {
+            $destinationPath = 'storage/bukti'; // upload path
+            $nama_image = date('YmdHis') . "." . $imagee->getClientOriginalExtension();
+            $imagee->move($destinationPath, $nama_image);
+            $update['bukti_transaksi'] = "$nama_image";
+        }
+        DB::table('transactions')->where('id', $request->id_trans)->update(['path' => $nama_image, 'keterangan' => $keterangan]);
+        return redirect()->back();
     }
 
     /**
