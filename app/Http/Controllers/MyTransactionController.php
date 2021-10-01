@@ -26,11 +26,15 @@ class MyTransactionController extends Controller
             return DataTables::of($query)
                 ->addcolumn('action', function($item){
                     return '
-
                     <a href="'. route('dashboard.transaction', $item->id) .'" class="bg-blue-500 text-white rounded-md px-2 py-1 m-2">
                             Bayar
                     </a>
-                    
+                    <a href="'. route('dashboard.my-transaction.show', $item->id) .'" class="bg-blue-500 text-white rounded-md px-2 py-1 m-2">
+                            Show
+                    </a>
+                    ';
+                    if ($item->path !== null)
+                    return '
                     <a href="'. route('dashboard.my-transaction.show', $item->id) .'" class="bg-blue-500 text-white rounded-md px-2 py-1 m-2">
                             Show
                     </a>
@@ -120,8 +124,15 @@ class MyTransactionController extends Controller
      */
     public function upload(Request $request)
     {
+
+        $request->validate([
+            'bukti_transaksi' => 'required',
+            'keterangan' => 'nullable'
+        ]);
+
         $imagee = $request->file('bukti_transaksi');
         $keterangan = $request->keterangan;
+        $nama_image = null;
         if ($request->hasFile('bukti_transaksi')) {
             $destinationPath = 'storage/bukti'; // upload path
             $nama_image = date('YmdHis') . "." . $imagee->getClientOriginalExtension();

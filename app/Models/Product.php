@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory, SoftDeletes;
     
     protected $fillable = [
-        'name', 'description', 'stock', 'price', 'categories_id', 'tags', 'slug'
+        'name', 'description', 'stock', 'price', 'supplier_id', 'categories_id', 'tags', 'slug'
     ];    
 
     public function galleries()

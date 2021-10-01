@@ -97,6 +97,9 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Bukti Transfer
                             </th>
+                            <th>
+                            Aksi
+                            </th>
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -111,6 +114,11 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <a href="{{ url('storage/bukti/'. $transaction->path) }}" target="_blank">
                                     <img width="200px" src="{{ url('storage/bukti/'. $transaction->path) }}" alt="{{ $transaction->keterangan }}">
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('dashboard.transaction'. $transaction->id) }}" class="bg-blue-500 text-white rounded-md px-2 py-1 m-2">
+                                    Perbaharui
                                 </a>
                             </td>
                         </tr>
